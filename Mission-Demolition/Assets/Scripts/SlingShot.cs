@@ -70,7 +70,10 @@ public class SlingShot : MonoBehaviour
             projRigidbody.isKinematic = false;
             projRigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
             projRigidbody.velocity = -mouseDelta * velocityMult;
+            FollowCam.POI = projectile;
             projectile = null;
+            
+
         }
     }
 }
