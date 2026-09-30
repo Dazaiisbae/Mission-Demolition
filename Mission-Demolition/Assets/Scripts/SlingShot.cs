@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SlingShot : MonoBehaviour
 
 {
-    public GameObject LaunchPoint;
-    public GameObject ProjectilePrefab;
+    public GameObject launchPoint;
+    public GameObject projectilePrefab;
     public float velocityMult = 10f;
+    public GameObject projLinePrefab;
     public Vector3 launchPos;
     public GameObject projectile;
     public bool aimingMode;
@@ -15,20 +17,20 @@ public class SlingShot : MonoBehaviour
     private void Awake()
     {
         Transform launchPointTrans = transform.Find("LaunchPoint");
-        LaunchPoint = launchPointTrans.gameObject;
-        LaunchPoint.SetActive(false);
-        launchPos = LaunchPoint.transform.position;
+        launchPoint = launchPointTrans.gameObject;
+        launchPoint.SetActive(false);
+        launchPos = launchPoint.transform.position;
     }
     void OnMouseEnter()
    {
      //print("SlingShot: OnMouseEnter");
-     LaunchPoint.SetActive(true);
+     launchPoint.SetActive(true);
     }
 
     void OnMouseExit()
         {
        //print("SlingShot: OnMouseExit");
-       LaunchPoint.SetActive(false);
+       launchPoint.SetActive(false);
     }
 
 
@@ -36,7 +38,7 @@ public class SlingShot : MonoBehaviour
     {
         aimingMode = true;
         //instantiate a projectile
-        projectile = Instantiate(ProjectilePrefab) as GameObject;
+        projectile = Instantiate(projectilePrefab) as GameObject;
         projectile.transform.position = launchPos;
         projectile.GetComponent<Rigidbody>().isKinematic = true;
     }
@@ -71,6 +73,7 @@ public class SlingShot : MonoBehaviour
             projRigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
             projRigidbody.velocity = -mouseDelta * velocityMult;
             FollowCam.POI = projectile;
+            Instantiate<GameObject>(projLinePrefab, projectile.transform);
             projectile = null;
             
 
