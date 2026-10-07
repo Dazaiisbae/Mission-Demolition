@@ -28,7 +28,7 @@ public class Projectile : MonoBehaviour
         awake = true;
         prevPos = new Vector3(1000, 1000, 0);
         deltas.Add(1000);
-        Projectile.Add(this);
+        _projectiles.Add(this);
     }
 
 
@@ -63,7 +63,7 @@ public class Projectile : MonoBehaviour
 
     private void OnDestroy()
     {
-        Projectile.remove(this);
+        _projectiles.Remove(this);
     }
 
     static public void DESTROY_PROJECTILES()
