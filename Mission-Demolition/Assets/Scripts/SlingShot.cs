@@ -75,7 +75,7 @@ public class SlingShot : MonoBehaviour
             FollowCam.POI = projectile;
             Instantiate<GameObject>(projLinePrefab, projectile.transform);
             projectile = null;
-            
+            MissionDemolition.shotfired();
 
         }
     }
